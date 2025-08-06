@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탱화점 - 환상적인 디지털 체험</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #0a0f1c 0%, #1a1f3a 30%, #1e2a5a 70%, #2b3a6b 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 배경 별빛 효과 */
+        .stars-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 223, 0, 0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 223, 0, 0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.8), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            width: 100vw;
+        }
+
+        /* 웰컴 섹션 - 첫 번째 이미지 스타일 */
+        .welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            transition: all 0.5s ease-out;
+        }
+
+        /* 신비로운 눈 로고 */
+        .mystic-eye {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            margin: 0 auto 50px auto;
+            animation: eyeGlow 3s ease-in-out infinite;
+        }
+
+        .eye-outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 100px;
+            border: 4px solid #ffd700;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px #ffd700,
+                0 0 60px rgba(255, 215, 0, 0.6),
+                inset 0 0 25px rgba(255, 215, 0, 0.2);
+            animation: eyeOuterPulse 2s ease-in-out infinite;
+            background: radial-gradient(ellipse, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .eye-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, 
+                #fff176 0%, 
+                #ffd700 30%, 
+                #ffb300 60%, 
+                #ff8f00 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 40px #ffd700,
+                0 0 80px rgba(255, 215, 0, 0.8),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: pupilPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        .eye-sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 14px;
+            animation: sparkleFloat 2s ease-in-out infinite;
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        .sparkle:nth-child(1) { top: 5px; left: 15px; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 15px; right: 25px; animation-delay: 0.3s; }
+        .sparkle:nth-child(3) { bottom: 10px; left: 5px; animation-delay: 0.6s; }
+        .sparkle:nth-child(4) { bottom: 20px; right: 10px; animation-delay: 0.9s; }
+        .sparkle:nth-child(5) { top: 40%; left: -15px; animation-delay: 1.2s; }
+        .sparkle:nth-child(6) { top: 60%; right: -15px; animation-delay: 1.5s; }
+
+        @keyframes eyeGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes eyeOuterPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px #ffd700,
+                    0 0 60px rgba(255, 215, 0, 0.6),
+                    inset 0 0 25px rgba(255, 215, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 50px #ffd700,
+                    0 0 100px rgba(255, 215, 0, 0.8),
+                    inset 0 0 35px rgba(255, 215, 0, 0.3);
+            }
+        }
+
+        @keyframes pupilPulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(-10px) rotate(180deg) scale(1.3); 
+                opacity: 1;
+            }
+        }
+
+        /* 웰컴페이지 타이틀 */
+        .main-logo h1 {
+            font-size: 8rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 
+                0 0 8px rgba(255, 215, 0, 0.4),
+                2px 2px 4px rgba(0, 0, 0, 0.8),
+                -1px -1px 1px rgba(255, 255, 255, 0.1);
+            margin: 0 0 30px 0;
+            letter-spacing: 20px;
+            position: relative;
+            left: 10px;
+            animation: titleGentle 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGentle {
+            0% {
+                transform: scale(1);
+                text-shadow: 
+                    0 0 6px rgba(255, 215, 0, 0.3),
+                    2px 2px 4px rgba(0, 0, 0, 0.8),
+                    -1px -1px 1px rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                transform: scale(1.02);
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 0.5),
+                    2px 2px 4px rgba(0, 0, 0, 0.8),
+                    -1px -1px 1px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .subtitle {
+            font-size: 2em;
+            color: #fff;
+            opacity: 0.9;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .enter-button {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            animation: buttonPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        .enter-button:hover {
+            background: linear-gradient(45deg, #ffed4e, #ffd700);
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            line-height: 1.5;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer .disclaimer {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* 홈 버튼 */
+        .home-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            background: rgba(15, 20, 25, 0.9);
+            color: #ffd700;
+            border: 2px solid rgba(255, 223, 0, 0.5);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-button.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .home-button:hover {
+            background: rgba(255, 223, 0, 0.1);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 223, 0, 0.2);
+        }
+
+        /* 모드 선택 화면 - 두 번째 이미지 스타일 */
+        .mode-screen {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s ease-out;
+        }
+
+        .mode-screen.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 모드 화면 헤더 */
+        .mode-header {
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+
+        .mode-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 
+                0 0 15px rgba(255, 215, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.4);
+            margin: 0 0 10px 0;
+            letter-spacing: 10px;
+            position: relative;
+            left: 5px;
+        }
+
+        .mode-header .subtitle-small {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            margin: 0 0 30px 0;
+        }
+
+        /* 운명의 실 구분선 */
+        .destiny-divider {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 0;
+            padding: 20px;
+            margin: 0;
+            font-size: 1.4rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-weight: 500;
+            text-align: center;
+            border-left: none;
+            border-right: none;
+        }
+
+        /* 모드 그리드 */
+        .mode-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 50px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .mode-grid .row-2 {
+            grid-column: 1 / span 2;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .mode-card {
+            background: rgba(25, 35, 55, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 2px solid rgba(255, 223, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 223, 0, 0.1) 0%, rgba(255, 160, 0, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mode-card:hover::before {
+            opacity: 1;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 25px rgba(255, 223, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        .mode-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.5));
+        }
+
+        .mode-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 223, 0, 0.3);
+        }
+
+        .mode-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .main-logo h1 {
+                font-size: 4rem;
+                letter-spacing: 10px;
+                left: 5px;
+            }
+
+            .subtitle {
+                font-size: 1.3em;
+            }
+
+            .mystic-eye {
+                width: 150px;
+                height: 90px;
+            }
+
+            .eye-outer {
+                width: 140px;
+                height: 80px;
+            }
+
+            .eye-inner {
+                width: 45px;
+                height: 45px;
+            }
+
+            .mode-header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+                left: 2.5px;
+            }
+
+            .mode-header .subtitle-small {
+                font-size: 1rem;
+            }
+
+            .destiny-divider {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+
+            .mode-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 30px 20px;
+            }
+
+            .mode-grid .row-2 {
+                grid-column: 1;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .mode-card {
+                padding: 30px 20px;
+                min-height: 150px;
+            }
+
+            .mode-icon {
+                font-size: 3rem;
+            }
+
+            .mode-title {
+                font-size: 1.5rem;
+            }
+
+            .mode-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 로딩 효과 */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 223, 0, 0.3);
+            border-top: 3px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 223, 0, 0.5);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-background"></div>
+
+    <div class="container">
+        <button class="home-button" id="homeButton" onclick="goHome()">
+            🏠 홈으로
+        </button>
+
+        <!-- 웰컴 섹션 -->
+        <div class="welcome-section" id="welcomeSection">
+            <div class="mystic-eye">
+                <div class="eye-outer"></div>
+                <div class="eye-inner"></div>
+                <div class="eye-sparkles">
+                    <span class="sparkle">✦</span>
+                    <span class="sparkle">✧</span>
+                    <span class="sparkle">⋆</span>
+                    <span class="sparkle">✨</span>
+                    <span class="sparkle">⭐</span>
+                    <span class="sparkle">✦</span>
+                </div>
+            </div>
+            
+            <div class="main-logo">
+                <h1>탱화점</h1>
+            </div>
+            
+            <div class="subtitle">
+                탱화점에 오신 걸 환영합니다
+            </div>
+
+            <button class="enter-button" onclick="showModes()" id="enterButton">
+                입장하기
+            </button>
+
+            <div class="footer">
+                <p>© 2025 탱화점. All rights reserved.</p>
+                <p>문의: contact@tanghwajeom.com | 상담시간: 09:00 - 22:00</p>
+                <p class="disclaimer">※ 본 서비스는 오락 목적으로 제공되며, 의학적 진단이나 법적 조언을 대체하지 않습니다.</p>
+            </div>
+        </div>
+
+        <!-- 모드 선택 화면 -->
+        <div class="mode-screen" id="modeScreen">
+            <div class="mode-header">
+                <h1>탱화점</h1>
+                <p class="subtitle-small">신비를 보는 눈</p>
+            </div>
+            
+            <div class="destiny-divider">
+                운명의 실을 읽어내는 신비로운 시간
+            </div>
+
+            <div class="mode-grid">
+                <div class="mode-card" onclick="goToMode('saju')">
+                    <div class="mode-icon">🔯</div>
+                    <div class="mode-title">사주</div>
+                    <div class="mode-description">전통 명리학으로 당신의 운명과 성격을 자세히 분석해드립니다</div>
+                </div>
+
+                <div class="mode-card" onclick="goToMode('tarot')">
+                    <div class="mode-icon">🌟</div>
+                    <div class="mode-title">타로</div>
+                    <div class="mode-description">신비한 동양타로 카드로 미래의 가능성을 제시합니다</div>
+                </div>
+
+                <div class="mode-card" onclick="goToMode('subido')">
+                    <div class="mode-icon">☯️</div>
+                    <div class="mode-title">수비도</div>
+                    <div class="mode-description">100가지 수비카드로 운명의 흐름을 읽어드립니다</div>
+                </div>
+
+                <div class="row-2">
+                    <div class="mode-card" onclick="goToMode('baekcho')">
+                        <div class="mode-icon">👻</div>
+                        <div class="mode-title">백초귀장술</div>
+                        <div class="mode-description">귀장술표로 1년 운세와 숨겨진 진실을 찾아드립니다</div>
+                    </div>
+
+                    <div class="mode-card" onclick="goToMode('seongmyeong')">
+                        <div class="mode-icon">📜</div>
+                        <div class="mode-title">성명학</div>
+                        <div class="mode-description">이름에 담긴 운명의 기운과 인생의 방향성을 해석해드립니다</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // 입장하기 버튼 클릭 시 모드 선택 화면 표시
+        function showModes() {
+            const welcomeSection = document.getElementById('welcomeSection');
+            const modeScreen = document.getElementById('modeScreen');
+            const homeButton = document.getElementById('homeButton');
+            
+            // 클릭 사운드 효과
+            playClickSound();
+            
+            // 웰컴 섹션 숨기기
+            welcomeSection.style.transition = 'all 0.5s ease-out';
+            welcomeSection.style.opacity = '0';
+            welcomeSection.style.transform = 'translateY(-30px) scale(0.95)';
+            
+            setTimeout(() => {
+                welcomeSection.style.display = 'none';
+                
+                // 모드 선택 화면 표시
+                modeScreen.classList.add('show');
+                
+                // 홈 버튼 표시
+                setTimeout(() => {
+                    homeButton.classList.add('show');
+                }, 300);
+            }, 500);
+        }
+
+        // 홈으로 돌아가기 함수
+        function goHome() {
+            const welcomeSection = document.getElementById('welcomeSection');
+            const modeScreen = document.getElementById('modeScreen');
+            const homeButton = document.getElementById('homeButton');
+            
+            // 클릭 사운드 효과
+            playClickSound();
+            
+            // 홈 버튼 숨기기
+            homeButton.classList.remove('show');
+            
+            // 모드 화면 숨기기
+            modeScreen.classList.remove('show');
+            
+            setTimeout(() => {
+                // 웰컴 섹션 다시 표시
+                welcomeSection.style.display = 'flex';
+                welcomeSection.style.opacity = '0';
+                welcomeSection.style.transform = 'translateY(30px) scale(0.95)';
+                
+                setTimeout(() => {
+                    welcomeSection.style.transition = 'all 0.6s ease-out';
+                    welcomeSection.style.opacity = '1';
+                    welcomeSection.style.transform = 'translateY(0) scale(1)';
+                }, 50);
+            }, 300);
+        }
+
+        // 모드 선택 함수
+        function goToMode(mode) {
+            // 로딩 효과 표시
+            document.querySelector('.loading').style.display = 'block';
+            
+            // 클릭 사운드 효과
+            playClickSound();
+            
+            // 페이지 전환 애니메이션
+            document.body.style.transition = 'opacity 0.5s ease-out';
+            document.body.style.opacity = '0.7';
+            
+            // 실제 페이지 이동
+            setTimeout(() => {
+                switch(mode) {
+                    case 'saju':
+                        window.location.href = './saju/index.html';
+                        break;
+                    case 'tarot':
+                        window.location.href = './tarot/index.html';
+                        break;
+                    case 'subido':
+                        window.location.href = './subido/index.html';
+                        break;
+                    case 'baekcho':
+                        window.location.href = './baekcho/index.html';
+                        break;
+                    case 'seongmyeong':
+                        window.location.href = './seongmyeong/index.html';
+                        break;
+                    default:
+                        alert('준비 중인 기능입니다!');
+                        document.querySelector('.loading').style.display = 'none';
+                        document.body.style.opacity = '1';
+                }
+            }, 800);
+        }
+
+        // 클릭 사운드 효과 함수
+        function playClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log('Audio context not available');
+            }
+        }
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '5') {
+                const modeIndex = parseInt(e.key) - 1;
+                const modes = ['saju', 'tarot', 'subido', 'baekcho', 'seongmyeong'];
+                if (modes[modeIndex]) {
+                    goToMode(modes[modeIndex]);
+                }
+            }
+        });
+
+        // 페이지 로드 완료 시 애니메이션 시작
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
