@@ -399,17 +399,76 @@
         </div>
         
         <div class="input-section" id="inputSection">
+            <!-- 사용방법 -->
+            <div style="margin-bottom: 40px;">
+                <div style="background: white; border-radius: 15px; padding: 25px; text-align: center; color: #333; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 2px solid #e9ecef;">
+                    <h4 style="margin-bottom: 15px; font-size: 1.3em; color: #333;">📋 사용 방법</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
+                        <div style="background: #f8f9fa; border-radius: 10px; padding: 15px; border: 1px solid #dee2e6;">
+                            <div style="background: #ff6b6b; color: white; border-radius: 50%; width: 30px; height: 30px; line-height: 30px; margin: 0 auto 10px; font-weight: bold;">1</div>
+                            <p style="font-size: 0.9em; color: #333;">한글 이름을 정확히 입력하세요</p>
+                        </div>
+                        <div style="background: #f8f9fa; border-radius: 10px; padding: 15px; border: 1px solid #dee2e6;">
+                            <div style="background: #4ecdc4; color: white; border-radius: 50%; width: 30px; height: 30px; line-height: 30px; margin: 0 auto 10px; font-weight: bold;">2</div>
+                            <p style="font-size: 0.9em; color: #333;">태어난 년도를 4자리로 입력하세요</p>
+                        </div>
+                        <div style="background: #f8f9fa; border-radius: 10px; padding: 15px; border: 1px solid #dee2e6;">
+                            <div style="background: #45b7d1; color: white; border-radius: 50%; width: 30px; height: 30px; line-height: 30px; margin: 0 auto 10px; font-weight: bold;">3</div>
+                            <p style="font-size: 0.9em; color: #333;">분석 버튼을 클릭하여 결과를 확인하세요</p>
+                        </div>
+                        <div style="background: #f8f9fa; border-radius: 10px; padding: 15px; border: 1px solid #dee2e6;">
+                            <div style="background: #96ceb4; color: white; border-radius: 50%; width: 30px; height: 30px; line-height: 30px; margin: 0 auto 10px; font-weight: bold;">4</div>
+                            <p style="font-size: 0.9em; color: #333;">파생수와 세운을 확인해보세요</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 이름 입력 -->
             <div class="input-group">
                 <label for="nameInput">이름</label>
                 <input type="text" id="nameInput" placeholder="이름을 입력하세요 (예: 홍길동)" maxlength="5">
             </div>
             
+            <!-- 태어난 년도 입력 -->
             <div class="input-group">
                 <label for="yearInput">태어난 년도</label>
                 <input type="number" id="yearInput" placeholder="년도를 입력하세요 (예: 1990)" min="1900" max="2025">
             </div>
             
+            <!-- 성명학 분석하기 버튼 -->
             <button class="analyze-btn" onclick="analyzeName()">🌟 성명학 분석하기</button>
+            
+            <!-- 분석 내용 -->
+            <div style="margin-top: 50px;">
+                <h3 style="text-align: center; color: #333; margin-bottom: 30px; font-size: 1.5em;">🔍 분석 내용</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div style="background: #f5f5f5; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🎯</div>
+                        <h4 style="color: #333; margin-bottom: 8px;">십성 분석</h4>
+                        <p style="color: #666; font-size: 0.9em;">이름과 생년월일의 오행 관계를<br>통한 십성 분석</p>
+                    </div>
+                    
+                    <div style="background: #f5f5f5; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">⚡</div>
+                        <h4 style="color: #333; margin-bottom: 8px;">파생수 계산</h4>
+                        <p style="color: #666; font-size: 0.9em;">십성 간의 상극 관계에서<br>나타나는 파생수 표시</p>
+                    </div>
+                    
+                    <div style="background: #f5f5f5; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🌟</div>
+                        <h4 style="color: #333; margin-bottom: 8px;">간지 분석</h4>
+                        <p style="color: #666; font-size: 0.9em;">태어난 해의 간지와<br>천을귀인, 공망, 충 등 신살</p>
+                    </div>
+                    
+                    <div style="background: #f5f5f5; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📅</div>
+                        <h4 style="color: #333; margin-bottom: 8px;">음양 판단</h4>
+                        <p style="color: #666; font-size: 0.9em;">이름 획수를 통한<br>음양 판단 및 오행 분류</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div id="result"></div>
