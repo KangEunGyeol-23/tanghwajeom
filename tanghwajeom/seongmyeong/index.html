@@ -967,6 +967,7 @@
             
             // 전역 변수에 저장
             window.charDataList = charDataList;
+            window.birthYear = year; // 태어난 년도 저장
         }
         
         // 십성 그룹 판별
@@ -1225,6 +1226,161 @@
             
             // 전역 변수 초기화
             window.charDataList = [];
+        }
+        
+        function showSaeun() {
+            // 세운 년도 입력 받기
+            const year = prompt("세운을 보고 싶은 년도를 입력하세요 (예: 2025):");
+            
+            if (!year || isNaN(year)) {
+                alert("올바른 년도를 입력해주세요.");
+                return;
+            }
+            
+            const saeunYear = parseInt(year);
+            const saeunGanJi = getGanJi(saeunYear);
+            
+            // 태어난 년도 정보 가져오기 (전역 변수에서)
+            const birthYear = parseInt(document.getElementById('yearInput').value) || window.birthYear;
+            const birthGanJi = getGanJi(birthYear);
+            
+            // 세운 십성 계산
+            const birthGanElement = getElementFromHanja(birthGanJi.ganHanja);
+            const birthGanYinYang = getYinYangFromHanja(birthGanJi.ganHanja);
+            const birthJiElement = getElementFromHanja(birthGanJi.jiHanja);
+            const birthJiYinYang = getYinYangFromHanja(birthGanJi.jiHanja);
+            
+            const saeunGanElement = getElementFromHanja(saeunGanJi.ganHanja);
+            const saeunGanYinYang = getYinYangFromHanja(saeunGanJi.ganHanja);
+            const saeunJiElement = getElementFromHanja(saeunGanJi.jiHanja);
+            const saeunJiYinYang = getYinYangFromHanja(saeunGanJi.jiHanja);
+            
+            // 4개 십성 계산 (태어난 년도 → 세운 년도 보기)
+            const leftTop = calculateSipseong(birthGanElement, birthGanYinYang, saeunGanElement, saeunGanYinYang);    // 천간→천간
+            const rightTop = calculateSipseong(birthGanElement, birthGanYinYang, saeunJiElement, saeunJiYinYang);     // 천간→지지
+            const leftBottom = calculateSipseong(birthJiElement, birthJiYinYang, saeunGanElement, saeunGanYinYang);   // 지지→천간
+            const rightBottom = calculateSipseong(birthJiElement, birthJiYinYang, saeunJiElement, saeunJiYinYang);    // 지지→지지
+            
+            // 특수신살 확인 (세운 기준)
+            const saeunGanGuiIn = cheonEulGuiIn[birthGanJi.ganHanja] || [];
+            const saeunJiGuiIn = cheonEulGuiIn[birthGanJi.jiHanja] || [];
+            
+            const hasLeftTopCheonEul = saeunGanGuiIn.includes(saeunGanJi.ganHanja);
+            const hasRightTopCheonEul = saeunGanGuiIn.includes(saeunGanJi.jiHanja);
+            const hasLeftBottomCheonEul = saeunJiGuiIn.includes(saeunGanJi.ganHanja);
+            const hasRightBottomCheonEul = saeunJiGuiIn.includes(saeunGanJi.jiHanja);
+            
+            const hasLeftTopGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.ganHanja);
+            const hasRightTopGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.jiHanja);
+            const hasLeftBottomGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.ganHanja);
+            const hasRightBottomGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.jiHanja);
+            
+            const yearGongmang = getGongmang(birthGanJi.ganHanja + birthGanJi.jiHanja);
+            const hasLeftTopGongmang = yearGongmang.includes(saeunGanJi.ganHanja);
+            const hasRightTopGongmang = yearGongmang.includes(saeunGanJi.jiHanja);
+            const hasLeftBottomGongmang = yearGongmang.includes(saeunGanJi.ganHanja);
+            const hasRightBottomGongmang = yearGongmang.includes(saeunGanJi.jiHanja);
+            
+            const hasLeftTopChung = checkChung(birthGanJi.jiHanja, saeunGanJi.ganHanja);
+            const hasRightTopChung = checkChung(birthGanJi.jiHanja, saeunGanJi.jiHanja);
+            const hasLeftBottomChung = checkChung(birthGanJi.jiHanja, saeunGanJi.ganHanja);
+            const hasRightBottomChung = checkChung(birthGanJi.jiHanja, saeunGanJi.jiHanja);
+            
+            // 특수 텍스트 조합
+            function getSpecialText(cheonEul, guimun, gongmang, chung) {
+                let blueText = '';
+                if (cheonEul) blueText += '천을';
+                if (guimun) {
+                    if (blueText) blueText += '<br>';
+                    blueText += '귀문';
+                }
+                if (gongmang) {
+                    if (blueText) blueText += '<br>';
+                    blueText += '공망';
+                }
+                
+                let purpleText = chung ? '충' : '';
+                
+                let result = '';
+                if (blueText) result += '<br><span class="cheoNeul-text">' + blueText + '</span>';
+                if (purpleText) result += '<br><span class="chung-text">' + purpleText + '</span>';
+                
+                return result;
+            }
+            
+            // 세운 결과 표시
+            const saeunHTML = `
+                <div class="char-analysis" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #2196f3;">
+                    <h3 style="text-align: center; color: #1976d2; margin-bottom: 20px;">
+                        📅 ${saeunYear}년 세운 (${birthYear}년생 기준)
+                    </h3>
+                    <table class="char-table">
+                        <tr>
+                            <td colspan="7" class="ganzi-header">${saeunGanJi.ganHanja} ${saeunGanJi.jiHanja}</td>
+                        </tr>
+                        <tr class="derived-row">
+                            <td class="derived-cell derived-left-cell">P</td>
+                            <td class="derived-cell"></td>
+                            <td class="derived-cell"></td>
+                            <td class="derived-cell"></td>
+                            <td class="derived-cell"></td>
+                            <td class="derived-cell"></td>
+                            <td class="derived-cell derived-right-cell">P</td>
+                        </tr>
+                        <tr class="sipseong-row">
+                            <td class="derived-left-cell"></td>
+                            <td class="sipseong-number">${leftTop}${getSpecialText(hasLeftTopCheonEul, hasLeftTopGuimun, hasLeftTopGongmang, hasLeftTopChung)}</td>
+                            <td>${sipseongNames[leftTop]}</td>
+                            <td class="char-cell" rowspan="2">${saeunYear}년</td>
+                            <td>${sipseongNames[rightTop]}</td>
+                            <td class="sipseong-number">${rightTop}${getSpecialText(hasRightTopCheonEul, hasRightTopGuimun, hasRightTopGongmang, hasRightTopChung)}</td>
+                            <td class="derived-right-cell"></td>
+                        </tr>
+                        <tr class="sipseong-row">
+                            <td class="derived-left-cell"></td>
+                            <td class="sipseong-number">${leftBottom}${getSpecialText(hasLeftBottomCheonEul, hasLeftBottomGuimun, hasLeftBottomGongmang, hasLeftBottomChung)}</td>
+                            <td>${sipseongNames[leftBottom]}</td>
+                            <td>${sipseongNames[rightBottom]}</td>
+                            <td class="sipseong-number">${rightBottom}${getSpecialText(hasRightBottomCheonEul, hasRightBottomGuimun, hasRightBottomGongmang, hasRightBottomChung)}</td>
+                            <td class="derived-right-cell"></td>
+                        </tr>
+                        <tr class="cheongan-row">
+                            <td colspan="7">${saeunGanJi.ganHanja}${saeunGanJi.jiHanja}</td>
+                        </tr>
+                    </table>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button onclick="toggleSaeunDerived(this)" class="derived-toggle" style="margin-right: 15px;">🔢 세운 파생수 보기</button>
+                        <button onclick="closeSaeun()" class="new-analysis-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f);">❌ 세운 닫기</button>
+                    </div>
+                </div>
+            `;
+            
+            // 결과 영역 끝에 세운 추가
+            const resultDiv = document.querySelector('.result');
+            if (resultDiv) {
+                resultDiv.insertAdjacentHTML('beforeend', saeunHTML);
+                
+                // 세운 결과로 스크롤
+                document.querySelector('.char-analysis:last-child').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }
+        }
+        
+        function toggleSaeunDerived(button) {
+            // 현재는 파생수가 자동으로 표시되므로 이 함수는 비활성화
+            alert("세운 파생수는 자동으로 표시됩니다!");
+        }
+        
+        function closeSaeun() {
+            // 마지막 세운 결과 제거
+            const saeunResults = document.querySelectorAll('.char-analysis');
+            const lastSaeun = saeunResults[saeunResults.length - 1];
+            
+            // 세운 결과인지 확인 (제목에 "세운"이 포함된 경우)
+            if (lastSaeun && lastSaeun.innerHTML.includes('세운')) {
+                lastSaeun.remove();
+            }
         }
         
         function goBack() {
