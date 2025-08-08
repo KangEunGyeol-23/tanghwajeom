@@ -396,6 +396,7 @@
 <body>
     <div class="container">
         <div class="header">
+            <button onclick="goBack()" style="position: absolute; left: 20px; top: 20px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 16px;">⬅️ 돌아가기</button>
             <h1 class="title">🔮 성명학 분석</h1>
             <p class="subtitle">이름과 생년월일로 운명을 읽다</p>
         </div>
@@ -1149,6 +1150,14 @@
             
             // 전역 변수 초기화
             window.charDataList = [];
+        }
+        
+        function goBack() {
+            // 브라우저 뒤로 가기
+            window.history.back();
+            
+            // 또는 특정 페이지로 이동하려면:
+            // window.location.href = 'index.html'; // 웰컴페이지 파일명에 맞게 수정
         }
         
         document.addEventListener('DOMContentLoaded', function() {
