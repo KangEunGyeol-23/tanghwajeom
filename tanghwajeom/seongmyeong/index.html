@@ -898,8 +898,44 @@
             resultHTML += `
                 <div class="buttons">
                     <button class="derived-toggle" onclick="toggleDerived()">🔢 파생수 보기/숨기기</button>
+                    <button class="new-analysis-btn" onclick="toggleSipseongChart()">📊 십성 분석 차트</button>
                     <button class="new-analysis-btn" onclick="newAnalysis()">🔄 새로운 분석하기</button>
                     <button class="new-analysis-btn saeun-btn" onclick="testSaeun()">📅 세운 보기</button>
+                </div>
+                
+                <!-- 십성 분석 차트 -->
+                <div id="sipseongChart" style="display: none; margin-top: 30px; background: white; border-radius: 15px; padding: 25px; border: 2px solid #4CAF50; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="text-align: center; color: #4CAF50; margin-bottom: 20px; font-size: 1.8em;">📊 전체 십성 분포 분석</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <!-- 십성 카운트 테이블 -->
+                        <div>
+                            <h4 style="text-align: center; margin-bottom: 15px; color: #333;">십성별 개수</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #ddd;">
+                                <thead>
+                                    <tr style="background: #4CAF50; color: white;">
+                                        <th style="padding: 10px; border: 1px solid #ddd;">십성</th>
+                                        <th style="padding: 10px; border: 1px solid #ddd;">개수</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sipseongCountTable">
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- 십성 막대 차트 -->
+                        <div>
+                            <h4 style="text-align: center; margin-bottom: 15px; color: #333;">십성 분포 차트</h4>
+                            <div id="sipseongBarChart" style="background: #f9f9f9; border-radius: 10px; padding: 15px; min-height: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 십성 해석 -->
+                    <div style="margin-top: 30px; background: #f0f8f0; border-radius: 10px; padding: 20px;">
+                        <h4 style="color: #4CAF50; margin-bottom: 15px;">💡 십성 분포 해석</h4>
+                        <div id="sipseongInterpretation" style="color: #333; line-height: 1.6;">
+                        </div>
+                    </div>
                 </div>
                 </div>
             `;
@@ -1421,6 +1457,202 @@
                 // 만약 히스토리가 없다면 상위 페이지로 이동 (필요에 따라 수정)
                 window.location.href = '../index.html';
             }
+        }
+        
+        // 십성 분석 차트 토글 함수
+        window.toggleSipseongChart = function() {
+            const chartDiv = document.getElementById('sipseongChart');
+            const button = document.querySelector('.buttons .new-analysis-btn[onclick="toggleSipseongChart()"]');
+            
+            if (chartDiv.style.display === 'none') {
+                // 차트 보이기
+                chartDiv.style.display = 'block';
+                button.textContent = '📁 십성 차트 숨기기';
+                button.style.background = 'linear-gradient(135deg, #f44336, #d32f2f)';
+                
+                // 십성 데이터 계산 및 차트 생성
+                createSipseongChart();
+                
+                // 스크롤 이동
+                chartDiv.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // 차트 숨기기
+                chartDiv.style.display = 'none';
+                button.textContent = '📊 십성 분석 차트';
+                button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            }
+        };
+        
+        // 십성 차트 생성 함수 (기본 성명학 분석만, 세운 제외)
+        function createSipseongChart() {
+            const charDataList = window.charDataList || [];
+            if (charDataList.length === 0) return;
+            
+            // 기본 성명학 분석의 십성만 카운트 (세운 제외)
+            const birthYear = window.birthYear;
+            const ganJi = getGanJi(birthYear);
+            const ganElement = getElementFromHanja(ganJi.ganHanja);
+            const jiElement = getElementFromHanja(ganJi.jiHanja);
+            const ganYinYang = getYinYangFromHanja(ganJi.ganHanja);
+            const jiYinYang = getYinYangFromHanja(ganJi.jiHanja);
+            
+            // 십성 카운트 계산 (기본 분석만)
+            const sipseongCount = {};
+            sipseongNames.forEach(name => sipseongCount[name] = 0);
+            
+            charDataList.forEach(charData => {
+                charData.sipseongData.forEach(sipseongInfo => {
+                    // 기본 성명학 분석의 십성만 카운트
+                    const myElement = sipseongInfo.element;
+                    const myYinYang = charData.isYang ? 'yang' : 'eum';
+                    
+                    const ganSipseong = calculateSipseong(myElement, myYinYang, ganElement, ganYinYang);
+                    const jiSipseong = calculateSipseong(myElement, myYinYang, jiElement, jiYinYang);
+                    
+                    const ganName = sipseongNames[ganSipseong];
+                    const jiName = sipseongNames[jiSipseong];
+                    
+                    sipseongCount[ganName]++;
+                    sipseongCount[jiName]++;
+                });
+            });
+            
+            // 테이블 생성
+            const tableBody = document.getElementById('sipseongCountTable');
+            tableBody.innerHTML = '';
+            
+            sipseongNames.forEach(name => {
+                const count = sipseongCount[name];
+                const row = document.createElement('tr');
+                row.style.background = count > 0 ? '#e8f5e8' : '#f9f9f9';
+                row.innerHTML = `
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">${name}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center; font-weight: bold; color: ${count > 0 ? '#4CAF50' : '#999'};">${count}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // 막대 차트 생성
+            const chartDiv = document.getElementById('sipseongBarChart');
+            chartDiv.innerHTML = '';
+            
+            const maxCount = Math.max(...Object.values(sipseongCount));
+            const chartHeight = 250;
+            
+            sipseongNames.forEach(name => {
+                const count = sipseongCount[name];
+                const barHeight = maxCount > 0 ? (count / maxCount) * chartHeight : 0;
+                
+                const barContainer = document.createElement('div');
+                barContainer.style.cssText = `
+                    display: inline-block;
+                    width: ${100 / sipseongNames.length}%;
+                    height: ${chartHeight + 40}px;
+                    text-align: center;
+                    vertical-align: bottom;
+                    position: relative;
+                `;
+                
+                const bar = document.createElement('div');
+                bar.style.cssText = `
+                    width: 80%;
+                    height: ${barHeight}px;
+                    background: linear-gradient(135deg, #4CAF50, #81C784);
+                    margin: 0 auto ${chartHeight - barHeight}px auto;
+                    border-radius: 4px 4px 0 0;
+                    position: relative;
+                    transition: all 0.3s ease;
+                `;
+                
+                if (count > 0) {
+                    bar.style.cursor = 'pointer';
+                    bar.onmouseover = () => bar.style.background = 'linear-gradient(135deg, #45a049, #66bb6a)';
+                    bar.onmouseout = () => bar.style.background = 'linear-gradient(135deg, #4CAF50, #81C784)';
+                    
+                    // 개수 표시
+                    const countLabel = document.createElement('div');
+                    countLabel.textContent = count;
+                    countLabel.style.cssText = `
+                        position: absolute;
+                        top: -25px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #333;
+                        color: white;
+                        padding: 2px 6px;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        font-weight: bold;
+                    `;
+                    bar.appendChild(countLabel);
+                }
+                
+                const label = document.createElement('div');
+                label.textContent = name;
+                label.style.cssText = `
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    font-size: 11px;
+                    color: #333;
+                    font-weight: bold;
+                `;
+                
+                barContainer.appendChild(bar);
+                barContainer.appendChild(label);
+                chartDiv.appendChild(barContainer);
+            });
+            
+            // 해석 생성 (기본 분석 기준)
+            createSipseongInterpretation(sipseongCount, '기본 성명학');
+        }
+        
+        // 십성 해석 생성 함수
+        function createSipseongInterpretation(sipseongCount, analysisType = '기본 성명학') {
+            const interpretationDiv = document.getElementById('sipseongInterpretation');
+            
+            const totalCount = Object.values(sipseongCount).reduce((sum, count) => sum + count, 0);
+            const dominantSipseong = Object.entries(sipseongCount).sort((a, b) => b[1] - a[1]).slice(0, 3);
+            
+            let interpretation = `<p><strong>${analysisType} 전체 십성 개수:</strong> ${totalCount}개</p>`;
+            
+            if (dominantSipseong[0][1] > 0) {
+                interpretation += `<p><strong>주요 십성:</strong> `;
+                dominantSipseong.forEach((item, index) => {
+                    if (item[1] > 0) {
+                        interpretation += `${item[0]}(${item[1]}개)`;
+                        if (index < dominantSipseong.length - 1 && dominantSipseong[index + 1][1] > 0) {
+                            interpretation += ', ';
+                        }
+                    }
+                });
+                interpretation += `</p>`;
+                
+                // 주요 십성 특성 설명
+                const sipseongMeaning = {
+                    '정인': '학습능력과 지혜, 어머니와의 인연',
+                    '편인': '창의성과 직감, 특별한 재능',
+                    '비견': '자존심과 독립성, 친구와의 인연',
+                    '겁재': '경쟁심과 도전정신, 형제와의 인연',
+                    '식신': '표현력과 여유, 자식과의 인연',
+                    '상관': '재능과 개성, 창조적 능력',
+                    '편재': '사업수완과 기회포착, 아버지와의 인연',
+                    '정재': '성실함과 축적, 안정적 재물운',
+                    '편관': '추진력과 권위, 변화와 도전',
+                    '정관': '책임감과 신뢰, 안정적 지위'
+                };
+                
+                if (dominantSipseong[0][1] > 0) {
+                    const mainSipseong = dominantSipseong[0][0];
+                    interpretation += `<p><strong>${mainSipseong} 특성:</strong> ${sipseongMeaning[mainSipseong] || '특별한 의미를 가집니다.'}</p>`;
+                }
+                
+                interpretation += `<p style="color: #666; font-size: 0.9em; margin-top: 15px;"><em>※ 이 분석은 ${analysisType} 분석 결과이며, 세운 분석은 별도로 확인하시기 바랍니다.</em></p>`;
+            } else {
+                interpretation += `<p>십성 분포가 균등하여 균형잡힌 성격을 나타냅니다.</p>`;
+            }
+            
+            interpretationDiv.innerHTML = interpretation;
         }
         
         // 이벤트 리스너
