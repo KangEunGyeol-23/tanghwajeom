@@ -393,6 +393,7 @@
 <body>
     <div class="container">
         <div class="header">
+            <button class="back-header-btn" onclick="goBack()">← 뒤로</button>
             <h1 class="title">🔮 성명학 분석</h1>
             <p class="subtitle">이름과 생년월일로 운명을 읽다</p>
         </div>
@@ -1351,6 +1352,16 @@
             
             window.charDataList = [];
             window.birthYear = null;
+        }
+        
+        // 뒤로 가기 함수
+        window.goBack = function() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // 만약 히스토리가 없다면 상위 페이지로 이동 (필요에 따라 수정)
+                window.location.href = '../index.html';
+            }
         }
         
         // 이벤트 리스너
