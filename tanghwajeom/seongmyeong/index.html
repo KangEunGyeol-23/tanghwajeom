@@ -34,6 +34,7 @@
             color: white;
             text-align: center;
             padding: 40px 20px;
+            position: relative;
         }
         
         .title {
@@ -167,6 +168,17 @@
             vertical-align: middle;
         }
         
+        .saeun-table {
+            width: 100% !important;
+            table-layout: fixed !important;
+        }
+        
+        .saeun-table td {
+            width: 14.28% !important;
+            min-width: 14.28% !important;
+            max-width: 14.28% !important;
+        }
+        
         .ganzi-header {
             background: #6db4e8;
             color: white;
@@ -182,18 +194,6 @@
         .derived-cell {
             color: #d32f2f;
             font-size: 0.8em;
-        }
-        
-        .cheoNeul-text {
-            color: #1976d2;
-            font-size: 0.7em;
-            font-weight: bold;
-        }
-        
-        .chung-text {
-            color: #7b1fa2;
-            font-size: 0.7em;
-            font-weight: bold;
         }
         
         .sipseong-row {
@@ -227,14 +227,13 @@
             height: 35px;
         }
         
-        .jiji-row {
-            background: #e8f4f8;
-            height: 35px;
-        }
-        
         .buttons {
             text-align: center;
             margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
         }
         
         .derived-toggle {
@@ -246,7 +245,6 @@
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            margin-right: 15px;
             transition: all 0.3s ease;
         }
         
@@ -274,6 +272,14 @@
             transform: translateY(-2px);
         }
         
+        .saeun-btn {
+            background: linear-gradient(135deg, #2196f3, #1976d2) !important;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2) !important;
+        }
+        
         .derived-highlight {
             background: #ffd700 !important;
         }
@@ -285,113 +291,36 @@
             text-align: center;
         }
         
-        /* 기능 소개 섹션 */
-        .features-section {
-            margin-top: 50px;
-            text-align: center;
-        }
-        
-        .features-section h3 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .feature-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e9ecef;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card h4 {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .feature-card p {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        /* 사용법 안내 */
-        .guide-section {
-            margin-top: 50px;
-            text-align: center;
-        }
-        
-        .guide-section h3 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-        
-        .guide-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .step {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .step:hover {
-            transform: translateY(-3px);
-        }
-        
-        .step-number {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .cheoNeul-text {
+            color: #1976d2;
+            font-size: 0.7em;
             font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
         }
         
-        .step p {
-            font-size: 0.95em;
-            color: #555;
-            margin: 0;
-            line-height: 1.4;
+        .chung-text {
+            color: #7b1fa2;
+            font-size: 0.7em;
+            font-weight: bold;
         }
         
+        .back-header-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-header-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
         /* 모바일 반응형 */
         @media (max-width: 768px) {
             .container {
@@ -399,8 +328,7 @@
                 border-radius: 15px;
             }
             
-            .header button {
-                position: absolute !important;
+            .back-header-btn {
                 left: 10px !important;
                 top: 15px !important;
                 padding: 8px 12px !important;
@@ -441,9 +369,7 @@
             }
             
             .buttons {
-                display: flex;
                 flex-direction: column;
-                gap: 10px;
             }
             
             .derived-toggle, .new-analysis-btn {
@@ -451,10 +377,6 @@
                 margin: 0 !important;
                 padding: 12px !important;
                 font-size: 1em !important;
-            }
-            
-            .features-grid, .guide-steps {
-                grid-template-columns: 1fr !important;
             }
             
             .char-table td {
@@ -471,7 +393,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <button onclick="goBack()" style="position: absolute; left: 20px; top: 20px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 16px;">⬅️ 돌아가기</button>
             <h1 class="title">🔮 성명학 분석</h1>
             <p class="subtitle">이름과 생년월일로 운명을 읽다</p>
         </div>
@@ -488,62 +409,16 @@
             </div>
             
             <button class="analyze-btn" onclick="analyzeName()">🌟 성명학 분석하기</button>
-            
-            <!-- 기능 소개 섹션 -->
-            <div class="features-section">
-                <h3>🔍 분석 내용</h3>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h4>십성 분석</h4>
-                        <p>이름의 자음을 오행으로 변환하여 천간과의 관계를 분석합니다</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h4>파생수 계산</h4>
-                        <p>십성 간의 상극 관계에서 나타나는 파생수를 표시합니다</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🌟</div>
-                        <h4>간지 분석</h4>
-                        <p>태어난 해의 간지(천간+지지)를 기준으로 운명을 해석합니다</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h4>음양 판단</h4>
-                        <p>총 획수로 음양을 결정하여 정확한 오행 배치를 계산합니다</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 사용법 안내 -->
-            <div class="guide-section">
-                <h3>📖 사용 방법</h3>
-                <div class="guide-steps">
-                    <div class="step">
-                        <span class="step-number">1</span>
-                        <p>한글 이름을 정확히 입력하세요</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span>
-                        <p>태어난 년도를 4자리로 입력하세요</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span>
-                        <p>분석 버튼을 클릭하여 결과를 확인하세요</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">4</span>
-                        <p>파생수 버튼으로 추가 정보를 확인하세요</p>
-                    </div>
-                </div>
-            </div>
         </div>
         
         <div id="result"></div>
     </div>
 
     <script>
+        // 전역 변수
+        window.charDataList = [];
+        window.birthYear = null;
+        
         // 자음 획수
         const consonantStrokes = {
             'ㄱ': 1, 'ㄴ': 1, 'ㄷ': 2, 'ㄹ': 3, 'ㅁ': 3, 'ㅂ': 4, 'ㅅ': 2,
@@ -585,85 +460,21 @@
             ['卯', '申'], ['辰', '亥'], ['巳', '戌']
         ];
         
-        // 공망표 (60갑자 기준)
-        const gongmang = {
-            '갑자~계유': ['戌', '亥'],
-            '갑술~계미': ['申', '酉'], 
-            '갑신~계사': ['午', '未'],
-            '갑오~계묘': ['辰', '巳'],
-            '갑진~계축': ['寅', '卯'],
-            '갑인~계해': ['子', '丑']
-        };
-        
-        // 60갑자 순서
-        const sixtyGapja = [
-            '甲子','乙丑','丙寅','丁卯','戊辰','己巳','庚午','辛未','壬申','癸酉', // 1-10
-            '甲戌','乙亥','丙子','丁丑','戊寅','己卯','庚辰','辛巳','壬午','癸未', // 11-20  
-            '甲申','乙酉','丙戌','丁亥','戊子','己丑','庚寅','辛卯','壬辰','癸巳', // 21-30
-            '甲午','乙未','丙申','丁酉','戊戌','己亥','庚子','辛丑','壬寅','癸卯', // 31-40
-            '甲辰','乙巳','丙午','丁未','戊申','己酉','庚戌','辛亥','壬子','癸丑', // 41-50
-            '甲寅','乙卯','丙辰','丁巳','戊午','己未','庚申','辛酉','壬戌','癸亥'  // 51-60
-        ];
-        
         // 충(沖) 쌍
         const chungPairs = [
             ['寅', '申'], ['卯', '酉'], ['辰', '戌'], 
             ['巳', '亥'], ['午', '子'], ['未', '丑']
         ];
         
-        // 충 확인
-        function checkChung(yearJiji, nameJiji) {
-            return chungPairs.some(pair => 
-                (pair[0] === yearJiji && pair[1] === nameJiji) ||
-                (pair[1] === yearJiji && pair[0] === nameJiji)
-            );
-        }
-        
-        // 귀문관살 확인
-        function checkGuimunGwansal(yearJiji, nameJiji) {
-            return guimunGwansal.some(pair => 
-                (pair[0] === yearJiji && pair[1] === nameJiji) ||
-                (pair[1] === yearJiji && pair[0] === nameJiji)
-            );
-        }
-        
-        // 공망 확인
-        function getGongmang(yearGanJi) {
-            const index = sixtyGapja.indexOf(yearGanJi);
-            if (index === -1) return [];
-            
-            const groupIndex = Math.floor(index / 10);
-            const gongmangGroups = [
-                ['戌', '亥'], ['申', '酉'], ['午', '未'], 
-                ['辰', '巳'], ['寅', '卯'], ['子', '丑']
-            ];
-            
-            return gongmangGroups[groupIndex] || [];
-        }
-        
-        // 토의 지지 변환 (음양권 고려)
-        function convertToJijiWithSeason(cheongan, yearJiji) {
-            // 년도 지지의 음양권 판단
-            const yangGwon = ['寅', '卯', '辰', '巳', '午', '未']; // 봄, 여름
-            const eumGwon = ['申', '酉', '戌', '亥', '子', '丑']; // 가을, 겨울
-            
-            const isYangGwon = yangGwon.includes(yearJiji);
-            
-            const conversion = {
-                '甲': '寅', '乙': '卯', '丙': '巳', '丁': '午', 
-                '壬': '亥', '癸': '子',
-                '庚': '申', '辛': '酉'
-            };
-            
-            // 토는 특별 처리
-            if (cheongan === '戊') {
-                return isYangGwon ? '辰' : '戌';
-            } else if (cheongan === '己') {
-                return isYangGwon ? '未' : '丑';
-            }
-            
-            return conversion[cheongan] || '';
-        }
+        // 60갑자 순서
+        const sixtyGapja = [
+            '甲子','乙丑','丙寅','丁卯','戊辰','己巳','庚午','辛未','壬申','癸酉',
+            '甲戌','乙亥','丙子','丁丑','戊寅','己卯','庚辰','辛巳','壬午','癸未',
+            '甲申','乙酉','丙戌','丁亥','戊子','己丑','庚寅','辛卯','壬辰','癸巳',
+            '甲午','乙未','丙申','丁酉','戊戌','己亥','庚子','辛丑','壬寅','癸卯',
+            '甲辰','乙巳','丙午','丁未','戊申','己酉','庚戌','辛亥','壬子','癸丑',
+            '甲寅','乙卯','丙辰','丁巳','戊午','己未','庚申','辛酉','壬戌','癸亥'
+        ];
         
         // 한글 분해
         function hangulDecompose(char) {
@@ -726,20 +537,15 @@
             const sameYinYang = myYinYang === targetYinYang;
             
             if (myElement === targetElement) {
-                // 나와 같은 오행
-                return sameYinYang ? 1 : 2; // 비견(1) : 겁재(2)
+                return sameYinYang ? 1 : 2;
             } else if (relations[targetElement].generates === myElement) {
-                // 나를 생하는 오행
-                return sameYinYang ? 9 : 0; // 편인(9) : 정인(0)
+                return sameYinYang ? 9 : 0;
             } else if (relations[myElement].generates === targetElement) {
-                // 내가 생하는 오행
-                return sameYinYang ? 3 : 4; // 식신(3) : 상관(4)
+                return sameYinYang ? 3 : 4;
             } else if (relations[targetElement].destroys === myElement) {
-                // 나를 극하는 오행
-                return sameYinYang ? 7 : 8; // 편관(7) : 정관(8)
+                return sameYinYang ? 7 : 8;
             } else if (relations[myElement].destroys === targetElement) {
-                // 내가 극하는 오행
-                return sameYinYang ? 5 : 6; // 편재(5) : 정재(6)
+                return sameYinYang ? 5 : 6;
             }
             
             return 0;
@@ -764,6 +570,87 @@
             return yangHanja.includes(hanja) ? 'yang' : 'eum';
         }
         
+        // 귀문관살 확인
+        function checkGuimunGwansal(yearJiji, nameJiji) {
+            return guimunGwansal.some(pair => 
+                (pair[0] === yearJiji && pair[1] === nameJiji) ||
+                (pair[1] === yearJiji && pair[0] === nameJiji)
+            );
+        }
+        
+        // 공망 확인
+        function getGongmang(yearGanJi) {
+            const index = sixtyGapja.indexOf(yearGanJi);
+            if (index === -1) return [];
+            
+            const groupIndex = Math.floor(index / 10);
+            const gongmangGroups = [
+                ['戌', '亥'], ['申', '酉'], ['午', '未'], 
+                ['辰', '巳'], ['寅', '卯'], ['子', '丑']
+            ];
+            
+            return gongmangGroups[groupIndex] || [];
+        }
+        
+        // 충 확인
+        function checkChung(yearJiji, nameJiji) {
+            return chungPairs.some(pair => 
+                (pair[0] === yearJiji && pair[1] === nameJiji) ||
+                (pair[1] === yearJiji && pair[0] === nameJiji)
+            );
+        }
+        
+        // 토의 지지 변환 (음양권 고려)
+        function convertToJijiWithSeason(cheongan, yearJiji) {
+            const yangGwon = ['寅', '卯', '辰', '巳', '午', '未'];
+            const eumGwon = ['申', '酉', '戌', '亥', '子', '丑'];
+            
+            const isYangGwon = yangGwon.includes(yearJiji);
+            
+            const conversion = {
+                '甲': '寅', '乙': '卯', '丙': '巳', '丁': '午', 
+                '壬': '亥', '癸': '子', '庚': '申', '辛': '酉'
+            };
+            
+            if (cheongan === '戊') {
+                return isYangGwon ? '辰' : '戌';
+            } else if (cheongan === '己') {
+                return isYangGwon ? '未' : '丑';
+            }
+            
+            return conversion[cheongan] || '';
+        }
+        
+        // 십성 그룹 판별
+        function getSipseongGroup(sipseong) {
+            if ([1, 2].includes(sipseong)) return 'bijup';
+            if ([3, 4].includes(sipseong)) return 'siksang';
+            if ([5, 6].includes(sipseong)) return 'jaeseong';
+            if ([7, 8].includes(sipseong)) return 'gwanseong';
+            if ([9, 0].includes(sipseong)) return 'inseong';
+            return 'unknown';
+        }
+        
+        // 상극 관계 확인
+        function isGeukRelation(group1, group2) {
+            const geukMap = {
+                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                'siksang': 'gwanseong', 'gwanseong': 'bijup'
+            };
+            
+            return geukMap[group1] === group2 || geukMap[group2] === group1;
+        }
+        
+        // 극당하는 그룹이 도망가는 대상
+        function getEscapeTarget(attackedGroup) {
+            const escapeMap = {
+                'bijup': [5, 6], 'jaeseong': [9, 0], 'inseong': [3, 4],
+                'siksang': [7, 8], 'gwanseong': [1, 2]
+            };
+            return escapeMap[attackedGroup] || [];
+        }
+        
+        // 성명학 분석 함수
         function analyzeName() {
             const name = document.getElementById('nameInput').value.trim();
             const year = parseInt(document.getElementById('yearInput').value);
@@ -867,31 +754,25 @@
                 `;
                 
                 charData.sipseongData.forEach((sipseongInfo, index) => {
-                    // 천을귀인 확인
                     const yearGanGuiIn = cheonEulGuiIn[ganJi.ganHanja] || [];
                     const yearJiGuiIn = cheonEulGuiIn[ganJi.jiHanja] || [];
                     
                     const hasLeftCheonEul = yearGanGuiIn.includes(sipseongInfo.jiji);
                     const hasRightCheonEul = yearJiGuiIn.includes(sipseongInfo.jiji);
                     
-                    // 귀문관살 확인
                     const hasLeftGuimun = checkGuimunGwansal(ganJi.jiHanja, sipseongInfo.jiji);
                     const hasRightGuimun = checkGuimunGwansal(ganJi.jiHanja, sipseongInfo.jiji);
                     
-                    // 공망 확인
                     const yearGongmang = getGongmang(ganJi.ganHanja + ganJi.jiHanja);
                     const hasLeftGongmang = yearGongmang.includes(sipseongInfo.jiji);
                     const hasRightGongmang = yearGongmang.includes(sipseongInfo.jiji);
                     
-                    // 충 확인
                     const hasLeftChung = checkChung(ganJi.jiHanja, sipseongInfo.jiji);
                     const hasRightChung = checkChung(ganJi.jiHanja, sipseongInfo.jiji);
                     
-                    // 표시 텍스트 조합
                     let leftSpecialText = '';
                     let rightSpecialText = '';
                     
-                    // 파란색 텍스트들
                     if (hasLeftCheonEul) leftSpecialText += '천을';
                     if (hasLeftGuimun) {
                         if (leftSpecialText) leftSpecialText += '<br>';
@@ -912,7 +793,6 @@
                         rightSpecialText += '공망';
                     }
                     
-                    // 보라색 충 텍스트
                     let leftChungText = hasLeftChung ? '충' : '';
                     let rightChungText = hasRightChung ? '충' : '';
                     
@@ -959,69 +839,316 @@
                 <div class="buttons">
                     <button class="derived-toggle" onclick="toggleDerived()">🔢 파생수 보기/숨기기</button>
                     <button class="new-analysis-btn" onclick="newAnalysis()">🔄 새로운 분석하기</button>
+                    <button class="new-analysis-btn saeun-btn" onclick="testSaeun()">📅 세운 보기</button>
                 </div>
                 </div>
             `;
             
             document.getElementById('result').innerHTML = resultHTML;
             
-            // 전역 변수에 저장
             window.charDataList = charDataList;
-            window.birthYear = year; // 태어난 년도 저장
+            window.birthYear = year;
         }
         
-        // 십성 그룹 판별
-        function getSipseongGroup(sipseong) {
-            if ([1, 2].includes(sipseong)) return 'bijup'; // 비겁
-            if ([3, 4].includes(sipseong)) return 'siksang'; // 식상
-            if ([5, 6].includes(sipseong)) return 'jaeseong'; // 재성
-            if ([7, 8].includes(sipseong)) return 'gwanseong'; // 관성
-            if ([9, 0].includes(sipseong)) return 'inseong'; // 인성
-            return 'unknown';
-        }
-        
-        // 상극 관계 확인
-        function isGeukRelation(group1, group2) {
-            const geukMap = {
-                'bijup': 'jaeseong',    // 비겁 → 재성 극
-                'jaeseong': 'inseong',  // 재성 → 인성 극
-                'inseong': 'siksang',   // 인성 → 식상 극
-                'siksang': 'gwanseong', // 식상 → 관성 극
-                'gwanseong': 'bijup'    // 관성 → 비겁 극
-            };
+        // 테스트용 세운 함수
+        function testSaeun() {
+            if (!window.birthYear) {
+                alert('먼저 성명학 분석을 해주세요.');
+                return;
+            }
             
-            return geukMap[group1] === group2 || geukMap[group2] === group1;
+            const resultDiv = document.querySelector('.result');
+            const inputHTML = `
+                <div style="background: #fff3e0; padding: 30px; margin: 20px 0; border-radius: 15px; text-align: center; border: 2px solid #ff9800;">
+                    <h3 style="color: #e65100; margin-bottom: 20px;">📅 세운 년도 입력</h3>
+                    <input type="number" id="saeunYearInput" placeholder="예: 2025" style="padding: 15px; font-size: 1.2em; border: 2px solid #ddd; border-radius: 8px; width: 200px; text-align: center;" min="1900" max="2100">
+                    <br><br>
+                    <button onclick="calculateSaeun()" style="background: #2196f3; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1em; margin-right: 10px; cursor: pointer;">세운 계산하기</button>
+                    <button onclick="closeSaeunInput()" style="background: #f44336; color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1em; cursor: pointer;">취소</button>
+                </div>
+            `;
+            
+            resultDiv.insertAdjacentHTML('beforeend', inputHTML);
+            document.getElementById('saeunYearInput').focus();
         }
         
-        // 극당하는 그룹이 도망가는 대상
-        function getEscapeTarget(attackedGroup) {
-            const escapeMap = {
-                'bijup': [5, 6],      // 비겁 극당함 → 재성으로 도망
-                'jaeseong': [9, 0],   // 재성 극당함 → 인성으로 도망
-                'inseong': [3, 4],    // 인성 극당함 → 식상으로 도망
-                'siksang': [7, 8],    // 식상 극당함 → 관성으로 도망
-                'gwanseong': [1, 2]   // 관성 극당함 → 비겁으로 도망
-            };
-            return escapeMap[attackedGroup] || [];
+        // 세운 계산 실행
+        function calculateSaeun() {
+            const yearInput = document.getElementById('saeunYearInput');
+            const year = yearInput.value;
+            
+            if (!year || isNaN(year) || year < 1900 || year > 2100) {
+                alert('1900~2100 사이의 올바른 년도를 입력해주세요!');
+                return;
+            }
+            
+            const saeunYear = parseInt(year);
+            closeSaeunInput();
+            showSaeunReal(saeunYear);
         }
         
-        function toggleDerived() {
-            const button = document.querySelector('.derived-toggle');
+        // 세운 입력창 닫기
+        function closeSaeunInput() {
+            const inputDiv = document.querySelector('.result > div:last-child');
+            if (inputDiv && inputDiv.innerHTML.includes('세운 년도 입력')) {
+                inputDiv.remove();
+            }
+        }
+        
+        // 실제 세운 계산 함수
+        function showSaeunReal(saeunYear) {
+            const saeunGanJi = getGanJi(saeunYear);
+            const birthYear = window.birthYear;
+            const birthGanJi = getGanJi(birthYear);
+            
+            createSaeunTable(saeunYear, saeunGanJi, birthYear, birthGanJi);
+        }
+        
+        // 세운 표 만들기
+        function createSaeunTable(saeunYear, saeunGanJi, birthYear, birthGanJi) {
+            try {
+                const charDataList = window.charDataList || [];
+                if (charDataList.length === 0) {
+                    alert('이름 분석 데이터가 없습니다. 먼저 성명학 분석을 해주세요.');
+                    return;
+                }
+                
+                const saeunGanElement = getElementFromHanja(saeunGanJi.ganHanja);
+                const saeunGanYinYang = getYinYangFromHanja(saeunGanJi.ganHanja);
+                const saeunJiElement = getElementFromHanja(saeunGanJi.jiHanja);
+                const saeunJiYinYang = getYinYangFromHanja(saeunGanJi.jiHanja);
+                
+                let saeunHTML = `
+                    <div class="char-analysis" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #2196f3;">
+                        <h3 style="text-align: center; color: #1976d2; margin-bottom: 20px; font-size: 3.5em; font-weight: 700;">
+                            📅 ${saeunYear}년 세운 분석
+                        </h3>
+                `;
+                
+                charDataList.forEach((charData, charIndex) => {
+                    let saeunTableHTML = `
+                        <div style="margin-bottom: 30px;">
+                            <div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: #1976d2;">
+                                ${charData.char}자 세운 (${charData.totalStrokes}획, ${charData.isYang ? '양' : '음'})
+                            </div>
+                            <table class="char-table" data-saeun-index="${charIndex}">
+                                <tr>
+                                    <td colspan="7" class="ganzi-header" style="background: linear-gradient(135deg, #9c27b0, #7b1fa2) !important;">${saeunGanJi.ganHanja} ${saeunGanJi.jiHanja}</td>
+                                </tr>
+                                <tr class="derived-row">
+                                    <td class="derived-cell derived-left-cell">P</td>
+                                    <td class="derived-cell"></td>
+                                    <td class="derived-cell"></td>
+                                    <td class="derived-cell"></td>
+                                    <td class="derived-cell"></td>
+                                    <td class="derived-cell"></td>
+                                    <td class="derived-cell derived-right-cell">P</td>
+                                </tr>
+                    `;
+                    
+                    // 세운 십성들 계산
+                    let saeunSipseongs = [];
+                    charData.sipseongData.forEach((sipseongInfo, index) => {
+                        const myElement = getElementFromHanja(sipseongInfo.cheongan);
+                        const myYinYang = charData.isYang ? 'yang' : 'eum';
+                        
+                        const ganSipseong = calculateSipseong(myElement, myYinYang, saeunGanElement, saeunGanYinYang);
+                        const jiSipseong = calculateSipseong(myElement, myYinYang, saeunJiElement, saeunJiYinYang);
+                        
+                        saeunSipseongs.push({ ganSipseong, jiSipseong, index });
+                    });
+                    
+                    // 파생수 계산
+                    let derivedData = [];
+                    
+                    // 왼쪽 세로 파생수
+                    for (let i = 0; i < saeunSipseongs.length - 1; i++) {
+                        const current = saeunSipseongs[i].ganSipseong;
+                        const next = saeunSipseongs[i + 1].ganSipseong;
+                        
+                        const currentGroup = getSipseongGroup(current);
+                        const nextGroup = getSipseongGroup(next);
+                        
+                        if (isGeukRelation(currentGroup, nextGroup)) {
+                            const geukMap = {
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
+                            };
+                            let attackedGroup = geukMap[currentGroup] === nextGroup ? nextGroup : currentGroup;
+                            const escapeTarget = getEscapeTarget(attackedGroup);
+                            derivedData.push({ position: 'left', index: i, numbers: escapeTarget.join(',') });
+                        }
+                    }
+                    
+                    // 오른쪽 세로 파생수
+                    for (let i = 0; i < saeunSipseongs.length - 1; i++) {
+                        const current = saeunSipseongs[i].jiSipseong;
+                        const next = saeunSipseongs[i + 1].jiSipseong;
+                        
+                        const currentGroup = getSipseongGroup(current);
+                        const nextGroup = getSipseongGroup(next);
+                        
+                        if (isGeukRelation(currentGroup, nextGroup)) {
+                            const geukMap = {
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
+                            };
+                            let attackedGroup = geukMap[currentGroup] === nextGroup ? nextGroup : currentGroup;
+                            const escapeTarget = getEscapeTarget(attackedGroup);
+                            derivedData.push({ position: 'right', index: i, numbers: escapeTarget.join(',') });
+                        }
+                    }
+                    
+                    charData.sipseongData.forEach((sipseongInfo, index) => {
+                        const myElement = getElementFromHanja(sipseongInfo.cheongan);
+                        const myYinYang = charData.isYang ? 'yang' : 'eum';
+                        
+                        const ganSipseong = calculateSipseong(myElement, myYinYang, saeunGanElement, saeunGanYinYang);
+                        const jiSipseong = calculateSipseong(myElement, myYinYang, saeunJiElement, saeunJiYinYang);
+                        
+                        // 세운에서의 신살 계산
+                        const saeunGanGuiIn = cheonEulGuiIn[saeunGanJi.ganHanja] || [];
+                        const saeunJiGuiIn = cheonEulGuiIn[saeunGanJi.jiHanja] || [];
+                        
+                        const hasLeftCheonEul = saeunGanGuiIn.includes(sipseongInfo.jiji);
+                        const hasRightCheonEul = saeunJiGuiIn.includes(sipseongInfo.jiji);
+                        
+                        const hasLeftGuimun = checkGuimunGwansal(saeunGanJi.jiHanja, sipseongInfo.jiji);
+                        const hasRightGuimun = checkGuimunGwansal(saeunGanJi.jiHanja, sipseongInfo.jiji);
+                        
+                        const saeunGongmang = getGongmang(saeunGanJi.ganHanja + saeunGanJi.jiHanja);
+                        const hasLeftGongmang = saeunGongmang.includes(sipseongInfo.jiji);
+                        const hasRightGongmang = saeunGongmang.includes(sipseongInfo.jiji);
+                        
+                        const hasLeftChung = checkChung(saeunGanJi.jiHanja, sipseongInfo.jiji);
+                        const hasRightChung = checkChung(saeunGanJi.jiHanja, sipseongInfo.jiji);
+                        
+                        let leftSpecialText = '';
+                        let rightSpecialText = '';
+                        
+                        if (hasLeftCheonEul) leftSpecialText += '천을';
+                        if (hasLeftGuimun) {
+                            if (leftSpecialText) leftSpecialText += '<br>';
+                            leftSpecialText += '귀문';
+                        }
+                        if (hasLeftGongmang) {
+                            if (leftSpecialText) leftSpecialText += '<br>';
+                            leftSpecialText += '공망';
+                        }
+                        
+                        if (hasRightCheonEul) rightSpecialText += '천을';
+                        if (hasRightGuimun) {
+                            if (rightSpecialText) rightSpecialText += '<br>';
+                            rightSpecialText += '귀문';
+                        }
+                        if (hasRightGongmang) {
+                            if (rightSpecialText) rightSpecialText += '<br>';
+                            rightSpecialText += '공망';
+                        }
+                        
+                        let leftChungText = hasLeftChung ? '충' : '';
+                        let rightChungText = hasRightChung ? '충' : '';
+                        
+                        // 이 행의 파생수 찾기
+                        const leftDerived = derivedData.find(d => d.position === 'left' && d.index === index);
+                        const rightDerived = derivedData.find(d => d.position === 'right' && d.index === index);
+                        
+                        if (index === 0) {
+                            const rowSpan = charData.sipseongData.length;
+                            saeunTableHTML += `
+                                <tr class="sipseong-row">
+                                    <td class="derived-left-cell"></td>
+                                    <td class="sipseong-number">${ganSipseong}${leftSpecialText ? '<br><span class="cheoNeul-text">' + leftSpecialText + '</span>' : ''}${leftChungText ? '<br><span class="chung-text">' + leftChungText + '</span>' : ''}</td>
+                                    <td>${sipseongNames[ganSipseong]}</td>
+                                    <td class="char-cell" rowspan="${rowSpan}">${charData.char}</td>
+                                    <td>${sipseongNames[jiSipseong]}</td>
+                                    <td class="sipseong-number">${jiSipseong}${rightSpecialText ? '<br><span class="cheoNeul-text">' + rightSpecialText + '</span>' : ''}${rightChungText ? '<br><span class="chung-text">' + rightChungText + '</span>' : ''}</td>
+                                    <td class="derived-right-cell"></td>
+                                </tr>
+                            `;
+                        } else {
+                            saeunTableHTML += `
+                                <tr class="sipseong-row">
+                                    <td class="derived-left-cell"></td>
+                                    <td class="sipseong-number">${ganSipseong}${leftSpecialText ? '<br><span class="cheoNeul-text">' + leftSpecialText + '</span>' : ''}${leftChungText ? '<br><span class="chung-text">' + leftChungText + '</span>' : ''}</td>
+                                    <td>${sipseongNames[ganSipseong]}</td>
+                                    <td>${sipseongNames[jiSipseong]}</td>
+                                    <td class="sipseong-number">${jiSipseong}${rightSpecialText ? '<br><span class="cheoNeul-text">' + rightSpecialText + '</span>' : ''}${rightChungText ? '<br><span class="chung-text">' + rightChungText + '</span>' : ''}</td>
+                                    <td class="derived-right-cell"></td>
+                                </tr>
+                            `;
+                        }
+                    });
+                    
+                    const cheonganList = charData.sipseongData.map(data => data.cheongan);
+                    saeunTableHTML += `
+                        <tr class="cheongan-row">
+                            <td colspan="7" style="background: #f0f0f0; height: 35px; text-align: center; font-weight: bold;">${cheonganList.join('')}</td>
+                        </tr>
+                    </table>
+                    </div>
+                    `;
+                    
+                    saeunHTML += saeunTableHTML;
+                });
+                
+                saeunHTML += `
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button onclick="toggleSaeunDerived()" class="derived-toggle" style="margin-right: 15px;">🔢 세운 파생수 보기</button>
+                            <button onclick="closeSaeun()" class="new-analysis-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f);">❌ 세운 닫기</button>
+                        </div>
+                    </div>
+                `;
+                
+                const resultDiv = document.querySelector('.result');
+                if (resultDiv) {
+                    resultDiv.insertAdjacentHTML('beforeend', saeunHTML);
+                    document.querySelector('.char-analysis:last-child').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }
+                
+            } catch (error) {
+                console.error('세운 계산 오류:', error);
+                alert('세운 계산 중 오류가 발생했습니다: ' + error.message);
+            }
+        }
+        
+        // 세운 파생수 토글 함수
+        function toggleSaeunDerived() {
+            const button = document.querySelector('.char-analysis:last-child .derived-toggle');
+            const saeunContainer = document.querySelector('.char-analysis:last-child');
             const isActive = button.classList.contains('active');
             
             if (!isActive) {
-                // 파생수 보이기
+                // 세운 파생수 보이기 - 원본 성명학 분석과 동일한 방식으로 처리
                 const charDataList = window.charDataList || [];
                 
-                // 각 글자별 파생수 계산
                 charDataList.forEach((charData, charIndex) => {
-                    const table = document.querySelector(`[data-char-index="${charIndex}"]`);
+                    const table = saeunContainer.querySelector(`[data-saeun-index="${charIndex}"]`);
                     if (!table) return;
                     
-                    const leftSipseongs = charData.sipseongData.map(data => data.ganSipseong);
-                    const rightSipseongs = charData.sipseongData.map(data => data.jiSipseong);
+                    // 세운 십성들을 다시 계산해서 파생수 적용
+                    const saeunGanJi = getGanJi(parseInt(button.closest('.char-analysis').querySelector('h3').textContent.match(/\d{4}/)[0]));
+                    const saeunGanElement = getElementFromHanja(saeunGanJi.ganHanja);
+                    const saeunGanYinYang = getYinYangFromHanja(saeunGanJi.ganHanja);
+                    const saeunJiElement = getElementFromHanja(saeunGanJi.jiHanja);
+                    const saeunJiYinYang = getYinYangFromHanja(saeunGanJi.jiHanja);
                     
-                    // 왼쪽 세로 파생수 계산
+                    const leftSipseongs = [];
+                    const rightSipseongs = [];
+                    
+                    charData.sipseongData.forEach((sipseongInfo) => {
+                        const myElement = getElementFromHanja(sipseongInfo.cheongan);
+                        const myYinYang = charData.isYang ? 'yang' : 'eum';
+                        
+                        const ganSipseong = calculateSipseong(myElement, myYinYang, saeunGanElement, saeunGanYinYang);
+                        const jiSipseong = calculateSipseong(myElement, myYinYang, saeunJiElement, saeunJiYinYang);
+                        
+                        leftSipseongs.push(ganSipseong);
+                        rightSipseongs.push(jiSipseong);
+                    });
+                    
                     for (let i = 0; i < leftSipseongs.length - 1; i++) {
                         const current = leftSipseongs[i];
                         const next = leftSipseongs[i + 1];
@@ -1030,26 +1157,21 @@
                         const nextGroup = getSipseongGroup(next);
                         
                         if (isGeukRelation(currentGroup, nextGroup)) {
-                            // 어느 쪽이 극당하는지 판단
                             const geukMap = {
-                                'bijup': 'jaeseong',
-                                'jaeseong': 'inseong',
-                                'inseong': 'siksang',
-                                'siksang': 'gwanseong',
-                                'gwanseong': 'bijup'
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
                             };
                             
                             let attackedGroup;
                             if (geukMap[currentGroup] === nextGroup) {
-                                attackedGroup = nextGroup; // current가 next를 극함
+                                attackedGroup = nextGroup;
                             } else {
-                                attackedGroup = currentGroup; // next가 current를 극함
+                                attackedGroup = currentGroup;
                             }
                             
                             const escapeTarget = getEscapeTarget(attackedGroup);
                             const derivedText = escapeTarget.join(',');
                             
-                            // 해당 행의 왼쪽 파생수 셀에 표시
                             const rows = table.querySelectorAll('.sipseong-row');
                             if (rows[i]) {
                                 const leftCell = rows[i].querySelector('.derived-left-cell');
@@ -1061,7 +1183,6 @@
                         }
                     }
                     
-                    // 오른쪽 세로 파생수 계산
                     for (let i = 0; i < rightSipseongs.length - 1; i++) {
                         const current = rightSipseongs[i];
                         const next = rightSipseongs[i + 1];
@@ -1071,11 +1192,8 @@
                         
                         if (isGeukRelation(currentGroup, nextGroup)) {
                             const geukMap = {
-                                'bijup': 'jaeseong',
-                                'jaeseong': 'inseong',
-                                'inseong': 'siksang',
-                                'siksang': 'gwanseong',
-                                'gwanseong': 'bijup'
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
                             };
                             
                             let attackedGroup;
@@ -1100,112 +1218,118 @@
                     }
                 });
                 
-                // 글자 간 파생수 계산
-                for (let charIndex = 0; charIndex < charDataList.length - 1; charIndex++) {
-                    const currentChar = charDataList[charIndex];
-                    const nextChar = charDataList[charIndex + 1];
+                button.textContent = '📁 세운 파생수 숨기기';
+                button.classList.add('active');
+            } else {
+                // 세운 파생수 숨기기
+                const derivedCells = saeunContainer.querySelectorAll('.derived-highlight');
+                derivedCells.forEach(cell => {
+                    cell.textContent = 'P';
+                    cell.classList.remove('derived-highlight');
+                });
+                
+                button.textContent = '🔢 세운 파생수 보기';
+                button.classList.remove('active');
+            }
+        }
+        
+        // 세운 닫기 함수
+        function closeSaeun() {
+            const saeunResults = document.querySelectorAll('.char-analysis');
+            const lastSaeun = saeunResults[saeunResults.length - 1];
+            
+            if (lastSaeun && lastSaeun.innerHTML.includes('세운')) {
+                lastSaeun.remove();
+            }
+        }
+        
+        // 파생수 토글 함수
+        function toggleDerived() {
+            const button = document.querySelector('.derived-toggle');
+            const isActive = button.classList.contains('active');
+            
+            if (!isActive) {
+                const charDataList = window.charDataList || [];
+                
+                charDataList.forEach((charData, charIndex) => {
+                    const table = document.querySelector(`[data-char-index="${charIndex}"]`);
+                    if (!table) return;
                     
-                    if (currentChar.sipseongData.length === 0 || nextChar.sipseongData.length === 0) continue;
+                    const leftSipseongs = charData.sipseongData.map(data => data.ganSipseong);
+                    const rightSipseongs = charData.sipseongData.map(data => data.jiSipseong);
                     
-                    // 현재 글자의 마지막 십성들과 다음 글자의 첫 십성들 비교
-                    const currentLastLeft = currentChar.sipseongData[currentChar.sipseongData.length - 1].ganSipseong;
-                    const currentLastRight = currentChar.sipseongData[currentChar.sipseongData.length - 1].jiSipseong;
-                    const nextFirstLeft = nextChar.sipseongData[0].ganSipseong;
-                    const nextFirstRight = nextChar.sipseongData[0].jiSipseong;
-                    
-                    // 왼쪽 연결
-                    const leftCurrentGroup = getSipseongGroup(currentLastLeft);
-                    const leftNextGroup = getSipseongGroup(nextFirstLeft);
-                    
-                    if (isGeukRelation(leftCurrentGroup, leftNextGroup)) {
-                        const geukMap = {
-                            'bijup': 'jaeseong',
-                            'jaeseong': 'inseong',
-                            'inseong': 'siksang',
-                            'siksang': 'gwanseong',
-                            'gwanseong': 'bijup'
-                        };
+                    for (let i = 0; i < leftSipseongs.length - 1; i++) {
+                        const current = leftSipseongs[i];
+                        const next = leftSipseongs[i + 1];
                         
-                        let attackedGroup;
-                        if (geukMap[leftCurrentGroup] === leftNextGroup) {
-                            attackedGroup = leftNextGroup;
-                        } else {
-                            attackedGroup = leftCurrentGroup;
-                        }
+                        const currentGroup = getSipseongGroup(current);
+                        const nextGroup = getSipseongGroup(next);
                         
-                        const escapeTarget = getEscapeTarget(attackedGroup);
-                        const derivedText = escapeTarget.join(',');
-                        
-                        // 현재 글자 오른쪽 끝 P에 표시
-                        const currentTable = document.querySelector(`[data-char-index="${charIndex}"]`);
-                        const currentRows = currentTable.querySelectorAll('.sipseong-row');
-                        const currentLastRow = currentRows[currentRows.length - 1];
-                        const currentRightCell = currentLastRow.querySelector('.derived-right-cell');
-                        if (currentRightCell && currentRightCell.textContent === 'P') {
-                            currentRightCell.textContent = derivedText;
-                            currentRightCell.classList.add('derived-highlight');
-                        }
-                        
-                        // 다음 글자 왼쪽 첫 P에 표시
-                        const nextTable = document.querySelector(`[data-char-index="${charIndex + 1}"]`);
-                        const nextRows = nextTable.querySelectorAll('.sipseong-row');
-                        const nextFirstRow = nextRows[0];
-                        const nextLeftCell = nextFirstRow.querySelector('.derived-left-cell');
-                        if (nextLeftCell && nextLeftCell.textContent === 'P') {
-                            nextLeftCell.textContent = derivedText;
-                            nextLeftCell.classList.add('derived-highlight');
-                        }
-                    }
-                    
-                    // 오른쪽 연결
-                    const rightCurrentGroup = getSipseongGroup(currentLastRight);
-                    const rightNextGroup = getSipseongGroup(nextFirstRight);
-                    
-                    if (isGeukRelation(rightCurrentGroup, rightNextGroup)) {
-                        const geukMap = {
-                            'bijup': 'jaeseong',
-                            'jaeseong': 'inseong',
-                            'inseong': 'siksang',
-                            'siksang': 'gwanseong',
-                            'gwanseong': 'bijup'
-                        };
-                        
-                        let attackedGroup;
-                        if (geukMap[rightCurrentGroup] === rightNextGroup) {
-                            attackedGroup = rightNextGroup;
-                        } else {
-                            attackedGroup = rightCurrentGroup;
-                        }
-                        
-                        const escapeTarget = getEscapeTarget(attackedGroup);
-                        const derivedText = escapeTarget.join(',');
-                        
-                        // 현재 글자 오른쪽 끝 P에 표시 (아직 표시 안된 경우)
-                        const currentTable = document.querySelector(`[data-char-index="${charIndex}"]`);
-                        const currentRows = currentTable.querySelectorAll('.sipseong-row');
-                        const currentLastRow = currentRows[currentRows.length - 1];
-                        const currentRightCell = currentLastRow.querySelector('.derived-right-cell');
-                        if (currentRightCell && currentRightCell.textContent === 'P') {
-                            currentRightCell.textContent = derivedText;
-                            currentRightCell.classList.add('derived-highlight');
-                        }
-                        
-                        // 다음 글자 왼쪽 첫 P에 표시 (아직 표시 안된 경우)
-                        const nextTable = document.querySelector(`[data-char-index="${charIndex + 1}"]`);
-                        const nextRows = nextTable.querySelectorAll('.sipseong-row');
-                        const nextFirstRow = nextRows[0];
-                        const nextLeftCell = nextFirstRow.querySelector('.derived-left-cell');
-                        if (nextLeftCell && nextLeftCell.textContent === 'P') {
-                            nextLeftCell.textContent = derivedText;
-                            nextLeftCell.classList.add('derived-highlight');
+                        if (isGeukRelation(currentGroup, nextGroup)) {
+                            const geukMap = {
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
+                            };
+                            
+                            let attackedGroup;
+                            if (geukMap[currentGroup] === nextGroup) {
+                                attackedGroup = nextGroup;
+                            } else {
+                                attackedGroup = currentGroup;
+                            }
+                            
+                            const escapeTarget = getEscapeTarget(attackedGroup);
+                            const derivedText = escapeTarget.join(',');
+                            
+                            const rows = table.querySelectorAll('.sipseong-row');
+                            if (rows[i]) {
+                                const leftCell = rows[i].querySelector('.derived-left-cell');
+                                if (leftCell) {
+                                    leftCell.textContent = derivedText;
+                                    leftCell.classList.add('derived-highlight');
+                                }
+                            }
                         }
                     }
-                }
+                    
+                    for (let i = 0; i < rightSipseongs.length - 1; i++) {
+                        const current = rightSipseongs[i];
+                        const next = rightSipseongs[i + 1];
+                        
+                        const currentGroup = getSipseongGroup(current);
+                        const nextGroup = getSipseongGroup(next);
+                        
+                        if (isGeukRelation(currentGroup, nextGroup)) {
+                            const geukMap = {
+                                'bijup': 'jaeseong', 'jaeseong': 'inseong', 'inseong': 'siksang',
+                                'siksang': 'gwanseong', 'gwanseong': 'bijup'
+                            };
+                            
+                            let attackedGroup;
+                            if (geukMap[currentGroup] === nextGroup) {
+                                attackedGroup = nextGroup;
+                            } else {
+                                attackedGroup = currentGroup;
+                            }
+                            
+                            const escapeTarget = getEscapeTarget(attackedGroup);
+                            const derivedText = escapeTarget.join(',');
+                            
+                            const rows = table.querySelectorAll('.sipseong-row');
+                            if (rows[i]) {
+                                const rightCell = rows[i].querySelector('.derived-right-cell');
+                                if (rightCell) {
+                                    rightCell.textContent = derivedText;
+                                    rightCell.classList.add('derived-highlight');
+                                }
+                            }
+                        }
+                    }
+                });
                 
                 button.textContent = '📁 파생수 숨기기';
                 button.classList.add('active');
             } else {
-                // 파생수 숨기기 - P로 복원
                 const derivedCells = document.querySelectorAll('.derived-highlight');
                 derivedCells.forEach(cell => {
                     cell.textContent = 'P';
@@ -1217,6 +1341,7 @@
             }
         }
         
+        // 새로운 분석 함수
         function newAnalysis() {
             document.getElementById('inputSection').classList.remove('hidden');
             document.getElementById('result').innerHTML = '';
@@ -1224,173 +1349,11 @@
             document.getElementById('yearInput').value = '';
             document.getElementById('nameInput').focus();
             
-            // 전역 변수 초기화
             window.charDataList = [];
+            window.birthYear = null;
         }
         
-        function showSaeun() {
-            // 세운 년도 입력 받기
-            const year = prompt("세운을 보고 싶은 년도를 입력하세요 (예: 2025):");
-            
-            if (!year || isNaN(year)) {
-                alert("올바른 년도를 입력해주세요.");
-                return;
-            }
-            
-            const saeunYear = parseInt(year);
-            const saeunGanJi = getGanJi(saeunYear);
-            
-            // 태어난 년도 정보 가져오기 (전역 변수에서)
-            const birthYear = parseInt(document.getElementById('yearInput').value) || window.birthYear;
-            const birthGanJi = getGanJi(birthYear);
-            
-            // 세운 십성 계산
-            const birthGanElement = getElementFromHanja(birthGanJi.ganHanja);
-            const birthGanYinYang = getYinYangFromHanja(birthGanJi.ganHanja);
-            const birthJiElement = getElementFromHanja(birthGanJi.jiHanja);
-            const birthJiYinYang = getYinYangFromHanja(birthGanJi.jiHanja);
-            
-            const saeunGanElement = getElementFromHanja(saeunGanJi.ganHanja);
-            const saeunGanYinYang = getYinYangFromHanja(saeunGanJi.ganHanja);
-            const saeunJiElement = getElementFromHanja(saeunGanJi.jiHanja);
-            const saeunJiYinYang = getYinYangFromHanja(saeunGanJi.jiHanja);
-            
-            // 4개 십성 계산 (태어난 년도 → 세운 년도 보기)
-            const leftTop = calculateSipseong(birthGanElement, birthGanYinYang, saeunGanElement, saeunGanYinYang);    // 천간→천간
-            const rightTop = calculateSipseong(birthGanElement, birthGanYinYang, saeunJiElement, saeunJiYinYang);     // 천간→지지
-            const leftBottom = calculateSipseong(birthJiElement, birthJiYinYang, saeunGanElement, saeunGanYinYang);   // 지지→천간
-            const rightBottom = calculateSipseong(birthJiElement, birthJiYinYang, saeunJiElement, saeunJiYinYang);    // 지지→지지
-            
-            // 특수신살 확인 (세운 기준)
-            const saeunGanGuiIn = cheonEulGuiIn[birthGanJi.ganHanja] || [];
-            const saeunJiGuiIn = cheonEulGuiIn[birthGanJi.jiHanja] || [];
-            
-            const hasLeftTopCheonEul = saeunGanGuiIn.includes(saeunGanJi.ganHanja);
-            const hasRightTopCheonEul = saeunGanGuiIn.includes(saeunGanJi.jiHanja);
-            const hasLeftBottomCheonEul = saeunJiGuiIn.includes(saeunGanJi.ganHanja);
-            const hasRightBottomCheonEul = saeunJiGuiIn.includes(saeunGanJi.jiHanja);
-            
-            const hasLeftTopGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.ganHanja);
-            const hasRightTopGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.jiHanja);
-            const hasLeftBottomGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.ganHanja);
-            const hasRightBottomGuimun = checkGuimunGwansal(birthGanJi.jiHanja, saeunGanJi.jiHanja);
-            
-            const yearGongmang = getGongmang(birthGanJi.ganHanja + birthGanJi.jiHanja);
-            const hasLeftTopGongmang = yearGongmang.includes(saeunGanJi.ganHanja);
-            const hasRightTopGongmang = yearGongmang.includes(saeunGanJi.jiHanja);
-            const hasLeftBottomGongmang = yearGongmang.includes(saeunGanJi.ganHanja);
-            const hasRightBottomGongmang = yearGongmang.includes(saeunGanJi.jiHanja);
-            
-            const hasLeftTopChung = checkChung(birthGanJi.jiHanja, saeunGanJi.ganHanja);
-            const hasRightTopChung = checkChung(birthGanJi.jiHanja, saeunGanJi.jiHanja);
-            const hasLeftBottomChung = checkChung(birthGanJi.jiHanja, saeunGanJi.ganHanja);
-            const hasRightBottomChung = checkChung(birthGanJi.jiHanja, saeunGanJi.jiHanja);
-            
-            // 특수 텍스트 조합
-            function getSpecialText(cheonEul, guimun, gongmang, chung) {
-                let blueText = '';
-                if (cheonEul) blueText += '천을';
-                if (guimun) {
-                    if (blueText) blueText += '<br>';
-                    blueText += '귀문';
-                }
-                if (gongmang) {
-                    if (blueText) blueText += '<br>';
-                    blueText += '공망';
-                }
-                
-                let purpleText = chung ? '충' : '';
-                
-                let result = '';
-                if (blueText) result += '<br><span class="cheoNeul-text">' + blueText + '</span>';
-                if (purpleText) result += '<br><span class="chung-text">' + purpleText + '</span>';
-                
-                return result;
-            }
-            
-            // 세운 결과 표시
-            const saeunHTML = `
-                <div class="char-analysis" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #2196f3;">
-                    <h3 style="text-align: center; color: #1976d2; margin-bottom: 20px;">
-                        📅 ${saeunYear}년 세운 (${birthYear}년생 기준)
-                    </h3>
-                    <table class="char-table">
-                        <tr>
-                            <td colspan="7" class="ganzi-header">${saeunGanJi.ganHanja} ${saeunGanJi.jiHanja}</td>
-                        </tr>
-                        <tr class="derived-row">
-                            <td class="derived-cell derived-left-cell">P</td>
-                            <td class="derived-cell"></td>
-                            <td class="derived-cell"></td>
-                            <td class="derived-cell"></td>
-                            <td class="derived-cell"></td>
-                            <td class="derived-cell"></td>
-                            <td class="derived-cell derived-right-cell">P</td>
-                        </tr>
-                        <tr class="sipseong-row">
-                            <td class="derived-left-cell"></td>
-                            <td class="sipseong-number">${leftTop}${getSpecialText(hasLeftTopCheonEul, hasLeftTopGuimun, hasLeftTopGongmang, hasLeftTopChung)}</td>
-                            <td>${sipseongNames[leftTop]}</td>
-                            <td class="char-cell" rowspan="2">${saeunYear}년</td>
-                            <td>${sipseongNames[rightTop]}</td>
-                            <td class="sipseong-number">${rightTop}${getSpecialText(hasRightTopCheonEul, hasRightTopGuimun, hasRightTopGongmang, hasRightTopChung)}</td>
-                            <td class="derived-right-cell"></td>
-                        </tr>
-                        <tr class="sipseong-row">
-                            <td class="derived-left-cell"></td>
-                            <td class="sipseong-number">${leftBottom}${getSpecialText(hasLeftBottomCheonEul, hasLeftBottomGuimun, hasLeftBottomGongmang, hasLeftBottomChung)}</td>
-                            <td>${sipseongNames[leftBottom]}</td>
-                            <td>${sipseongNames[rightBottom]}</td>
-                            <td class="sipseong-number">${rightBottom}${getSpecialText(hasRightBottomCheonEul, hasRightBottomGuimun, hasRightBottomGongmang, hasRightBottomChung)}</td>
-                            <td class="derived-right-cell"></td>
-                        </tr>
-                        <tr class="cheongan-row">
-                            <td colspan="7">${saeunGanJi.ganHanja}${saeunGanJi.jiHanja}</td>
-                        </tr>
-                    </table>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button onclick="toggleSaeunDerived(this)" class="derived-toggle" style="margin-right: 15px;">🔢 세운 파생수 보기</button>
-                        <button onclick="closeSaeun()" class="new-analysis-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f);">❌ 세운 닫기</button>
-                    </div>
-                </div>
-            `;
-            
-            // 결과 영역 끝에 세운 추가
-            const resultDiv = document.querySelector('.result');
-            if (resultDiv) {
-                resultDiv.insertAdjacentHTML('beforeend', saeunHTML);
-                
-                // 세운 결과로 스크롤
-                document.querySelector('.char-analysis:last-child').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            }
-        }
-        
-        function toggleSaeunDerived(button) {
-            // 현재는 파생수가 자동으로 표시되므로 이 함수는 비활성화
-            alert("세운 파생수는 자동으로 표시됩니다!");
-        }
-        
-        function closeSaeun() {
-            // 마지막 세운 결과 제거
-            const saeunResults = document.querySelectorAll('.char-analysis');
-            const lastSaeun = saeunResults[saeunResults.length - 1];
-            
-            // 세운 결과인지 확인 (제목에 "세운"이 포함된 경우)
-            if (lastSaeun && lastSaeun.innerHTML.includes('세운')) {
-                lastSaeun.remove();
-            }
-        }
-        
-        function goBack() {
-            // 브라우저 뒤로 가기
-            window.history.back();
-            
-            // 또는 특정 페이지로 이동하려면:
-            // window.location.href = 'index.html'; // 웰컴페이지 파일명에 맞게 수정
-        }
-        
+        // 이벤트 리스너
         document.addEventListener('DOMContentLoaded', function() {
             const nameInput = document.getElementById('nameInput');
             const yearInput = document.getElementById('yearInput');
